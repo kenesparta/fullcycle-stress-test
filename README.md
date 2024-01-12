@@ -1,2 +1,1 @@
-# fullcycle-stress-test
-Stress Test CLI
+# Stress test CLI

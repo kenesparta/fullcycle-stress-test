@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  go-cli-test:
+    build:
+      context: .
+      dockerfile: Dockerfile-cli
+    image: go-cli
+    container_name: go-cli
+    networks:
+      - stress-test
+
+networks:
+  stress-test:
