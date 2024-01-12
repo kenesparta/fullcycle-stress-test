@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/kenesparta/fullcycle-ratelimiter/internal/entity"
+	"github.com/kenesparta/fullcycle-stress-test/internal/entity"
 )
 
 func main() {
