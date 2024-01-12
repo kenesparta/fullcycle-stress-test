@@ -12,15 +12,15 @@
   ```
 - Then you can see this output:
   ```
-    -c int
-          Time in seconds of each request (default 1)
-    -m string
-          HTTP method to use (default "GET")
-    -r int
-          Amount of requests to send (default 1)
-    -url string
-          URL from service to test
-  
+  Usage of ./stress-test-cli:
+  -m string
+      HTTP method to use (default "GET")
+  -r int
+      Amount of requests to send (default 10)
+  -url string
+      URL from service to test
+  -w int
+      Amount of concurrent requests (workers) (default 1)
   ```
 
 - After that, you can execute this command (you should install `jq`)
@@ -32,7 +32,7 @@
 - You can use your custom flags
 
     ```shell
-    docker compose run --rm stress-test-cli -url http://google.com/ -c 10 -r 100 | jq
+    docker compose run --rm stress-test-cli -url http://google.com/ -w 10 -r 100 | jq
     ```
 
 - After you execute the command, you can se a response, something like this:
@@ -63,7 +63,7 @@
 
 - If you have some error in the CLI, we display it as a JSON string as well, please execute this:
   ```shell
-  docker compose run --rm stress-test-cli -url http://google.com/ -c 1000 -r 1 | jq
+  docker compose run --rm stress-test-cli -url http://google.com/ -w 1000 -r 1 | jq
   ```
   we show this error:
   ```json

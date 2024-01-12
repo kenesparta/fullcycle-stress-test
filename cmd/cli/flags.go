@@ -8,8 +8,8 @@ import (
 func setInputFlags() dto.RequestFlagInput {
 	var (
 		url         = flag.String("url", "", "URL from service to test")
-		requests    = flag.Int("r", 1, "Amount of requests to send")
-		concurrency = flag.Int("c", 1, "Time in seconds of each request")
+		requests    = flag.Int("r", 10, "Amount of requests to send")
+		concurrency = flag.Int("w", 1, "Amount of concurrent requests (workers)")
 		method      = flag.String("m", "GET", "HTTP method to use")
 	)
 
