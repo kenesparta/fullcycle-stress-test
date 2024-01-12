@@ -6,7 +6,7 @@ init:
 
 .PHONY: build
 build:
-	GOOS=linux CGO_ENABLED=0 go build -ldflags="-w -s" -o cli ./cmd/cli
+	GOOS=linux CGO_ENABLED=0 go build -ldflags="-w -s" -o stress-test-cli ./cmd/cli
 
 .PHONY: run
 run:

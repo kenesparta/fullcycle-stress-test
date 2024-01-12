@@ -4,5 +4,5 @@ COPY . .
 RUN make init && make build
 
 FROM scratch
-COPY --from=builder /app/cli .
-ENTRYPOINT ["./cli"]
+COPY --from=builder /app/stress-test-cli .
+ENTRYPOINT ["./stress-test-cli"]

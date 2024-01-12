@@ -15,7 +15,9 @@ type ResponseStats struct {
 
 	// totalDuration the total duration of the request's execution.
 	totalDuration time.Duration
-	SyMu          sync.Mutex
+
+	errors []error
+	SyMu   sync.Mutex
 }
 
 func NewResponseStats() *ResponseStats {
@@ -32,13 +34,19 @@ func (rs *ResponseStats) IncrementStatusMap(statusCode int) {
 }
 
 func (rs *ResponseStats) CalculateTotalDuration(start, end time.Time) {
-	rs.totalDuration = start.Sub(end)
+	rs.totalDuration = end.Sub(start)
 }
 
 func (rs *ResponseStats) IncrementRequest() {
 	rs.SyMu.Lock()
 	defer rs.SyMu.Unlock()
 	rs.requests++
+}
+
+func (rs *ResponseStats) AddingErrors(err error) {
+	rs.SyMu.Lock()
+	defer rs.SyMu.Unlock()
+	rs.errors = append(rs.errors, err)
 }
 
 func (rs *ResponseStats) TotalDuration() time.Duration {
@@ -51,4 +59,8 @@ func (rs *ResponseStats) Requests() int {
 
 func (rs *ResponseStats) StatusMap() map[int]int {
 	return rs.statusMap
+}
+
+func (rs *ResponseStats) Errors() []error {
+	return rs.errors
 }

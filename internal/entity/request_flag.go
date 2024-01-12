@@ -24,14 +24,14 @@ func (rf *RequestFlag) Validate() error {
 	}
 
 	if rf.Concurrency > rf.RequestAmount {
-		return fmt.Errorf("your number of request should be more than the workers")
+		return fmt.Errorf("we have more workers (go routines) than requests")
 	}
 
 	if !isValidURL(rf.URL) {
 		return fmt.Errorf("should be a URL valid value")
 	}
 
-	if !methodsAllowed(rf.Method) {
+	if !isMethodAllowed(rf.Method) {
 		return fmt.Errorf("should be a valid HTTP method")
 	}
 
@@ -49,7 +49,7 @@ func isValidURL(u string) bool {
 		parsedURL.Host != ""
 }
 
-func methodsAllowed(m string) bool {
+func isMethodAllowed(m string) bool {
 	mUp := strings.ToUpper(m)
 	return mUp == http.MethodGet ||
 		mUp == http.MethodPost ||

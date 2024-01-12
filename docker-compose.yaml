@@ -1,12 +1,12 @@
 version: '3.7'
 
 services:
-  go-cli-test:
+  stress-test-cli:
     build:
       context: .
       dockerfile: Dockerfile-cli
-    image: go-cli
-    container_name: go-cli
+    image: stress-test-cli
+    container_name: stress-test-cli
     networks:
       - stress-test
 
