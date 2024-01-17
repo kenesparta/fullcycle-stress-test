@@ -56,10 +56,10 @@
       the `status_map_count` values and `error_count` value.
     - `workers`: the total amount of concurrency requests performed.
     - `status_map_count`: the result map that counts the amount of HTTP requests status code, in this example we have
-      701 requests with status **200**, 3 requests with the status **301**, 79 with **302** and 219 with **409**.
+      701 requests with status **200**, 3 requests with the status **301**, 79 with **302** and 217 with **409**.
     - `errors`: The array of errors on the request. These errors are related with each request.
     - `error_count`: the amount of errors that we have during the stress tests.
-    - `total_duration`: the duration in string format, for this case, we perform the test in **~625.5ms**.
+    - `total_duration`: the duration in string format, for this case, we perform the test in **~33s**.
 
 # 🚨 Errors
 
