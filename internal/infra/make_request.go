@@ -1,6 +1,7 @@
 package infra
 
 import (
+	"crypto/tls"
 	"io"
 	"net/http"
 
@@ -20,7 +21,13 @@ func (mh *MakeHttpRequest) Get(rf entity.RequestFlag, cm entity.ConcurrencyMgmt)
 		return
 	}
 
-	client := &http.Client{}
+	client := &http.Client{
+		Transport: &http.Transport{
+			TLSClientConfig: &tls.Config{
+				InsecureSkipVerify: true,
+			},
+		},
+	}
 	response, doErr := client.Do(req)
 	if doErr != nil {
 		if response != nil {
