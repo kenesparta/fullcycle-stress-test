@@ -23,7 +23,12 @@ func (mh *MakeHttpRequest) Get(rf entity.RequestFlag, cm entity.ConcurrencyMgmt)
 	client := &http.Client{}
 	response, doErr := client.Do(req)
 	if doErr != nil {
-		cm.Status <- response.StatusCode
+		if response != nil {
+			cm.Status <- response.StatusCode
+			return
+		}
+
+		cm.Err <- doErr
 		return
 	}
 
