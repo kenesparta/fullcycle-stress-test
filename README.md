@@ -31,32 +31,32 @@
 
 - You can use your custom flags
 
-    ```shell
-    docker compose run --rm stress-test-cli -url http://google.com/ -w 10 -r 100 | jq
-    ```
+  ```shell
+    docker compose run --rm stress-test-cli -url http://google.com/ -w 20 -r 1000 | jq | jq
+  ```
 
 - After you execute the command, you can se a response, something like this:
   ```json
   {
-    "requests": 100,
-    "workers": 10,
-    "status_map_count": {
-      "200": 90,
-      "429": 9
-    },
-    "errors": [
-      "Get \"http://www.google.com/\": stopped after 10 redirects"
-    ],
-    "error_count": 1,
-    "total_duration": "625.48675ms"
+   "requests": 1000,
+   "workers": 20,
+   "status_map_count": {
+     "200": 701,
+     "301": 3,
+     "302": 79,
+     "429": 217
+   },
+   "errors": [],
+   "error_count": 0,
+   "total_duration": "33.274527583s"
   }
   ```
 
     - `requests`: the total amount of requests performed. This number must be equal to the sum of all
       the `status_map_count` values and `error_count` value.
     - `workers`: the total amount of concurrency requests performed.
-    - `status_map_count`: the result map that counts the amount of HTTP requests status code, in this example we have 9
-      requests with status **429** and 90 requests with the status **200**
+    - `status_map_count`: the result map that counts the amount of HTTP requests status code, in this example we have
+      701 requests with status **200**, 3 requests with the status **301**, 79 with **302** and 219 with **409**.
     - `errors`: The array of errors on the request. These errors are related with each request.
     - `error_count`: the amount of errors that we have during the stress tests.
     - `total_duration`: the duration in string format, for this case, we perform the test in **~625.5ms**.
